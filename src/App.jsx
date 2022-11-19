@@ -1,22 +1,35 @@
 import React, { useEffect, useState, useReducer } from "react";
+import Todo from "./components/Todo";
 import logo from "./logo.svg";
 
-const reducer = (todos, action) => {
-  console.log(todos, action);
+/**
+ * - 留存原有的 todoList, 單獨去新增 todoContent 以及 complete 的資料
+ */
+const reducer = (todoList, action) => {
+  console.log("todoList:", todoList);
+  console.log("action:", action);
+
+  const { todoContent } = action.payload;
 
   switch (action.type) {
     case "ADD":
-      return [...todos, { todoContent: handleEnterPoint }];
-
-      break;
+      return [...todoList, newTodo(todoContent)];
 
     default:
       break;
   }
 };
 
+const newTodo = (todoContent) => {
+  return {
+    id: Math.floor(Math.random() * 10000), // 先用這個方式解決對應 id
+    todoContent,
+    complete: false,
+  };
+};
+
 function App() {
-  const [todos, dispatch] = useReducer(reducer, []);
+  const [todoList, dispatch] = useReducer(reducer, []);
   const [todoContent, setTodoContent] = useState("");
 
   const handleSubmit = () => {
@@ -29,7 +42,7 @@ function App() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] selection:bg-green-900">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white selection:bg-green-900">
       <header>
         <img
           src={logo}
@@ -48,9 +61,9 @@ function App() {
       </header>
       {/* form */}
       <main>
-        <div className="mx-auto w-full max-w-xs">
+        <div className="mx-auto w-full min-w-full max-w-md">
           <form
-            className="mb-4 w-96 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+            className="mb-4 rounded bg-white px-8 pt-6 pb-8 shadow-md"
             onSubmit={handleEnterPoint}
           >
             <div className="mb-4">
@@ -86,6 +99,11 @@ function App() {
             </div>
           </form>
           <p className="text-center text-xs text-pink-500">{todoContent}</p>
+
+          {todoList.map((todo, index) => {
+            console.log("trigger");
+            return <Todo key={index} todo={todo} dispatch={dispatch} />;
+          })}
         </div>
       </main>
       <footer></footer>
