@@ -3,20 +3,29 @@ import TodoItem from "./components/TodoItem";
 import logo from "./logo.svg";
 
 /**
- * - 留存原有的 todoList, 單獨去新增 todoContent 以及 complete 的資料
+ * - ADD: 留存原有的 todoList, 單獨去新增 todoContent 以及 complete 的資料
+ * - TOGGLE: 判斷 id 是否 match，有的話，就將 complete = !complete
  */
 const reducer = (todoList, action) => {
   console.log("todoList:", todoList);
   console.log("action:", action);
 
-  const { todoContent } = action.payload;
+  const { todoContent, id } = action.payload;
 
   switch (action.type) {
     case "ADD":
       return [...todoList, newTodo(todoContent)];
 
+    case "TOGGLE":
+      return todoList.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, complete: !todo.complete };
+        }
+        return todo;
+      });
+
     default:
-      break;
+      return todoList;
   }
 };
 
