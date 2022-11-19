@@ -98,21 +98,13 @@ function App() {
                 placeholder="content"
               />
             </div>
-            <div className="flex items-center justify-between">
-              <button
-                className="focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none"
-                type="button"
-                onClick={handleSubmit}
-              >
-                ADD IN
-              </button>
-              <a
-                className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
-                href="#"
-              >
-                check content?
-              </a>
-            </div>
+            <button
+              className="focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none"
+              type="button"
+              onClick={handleSubmit}
+            >
+              ADD IN
+            </button>
           </form>
 
           {todoList.map((todo) => {
