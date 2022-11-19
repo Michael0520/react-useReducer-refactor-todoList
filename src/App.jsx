@@ -1,13 +1,36 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import logo from "./logo.svg";
-import poweredBy from "./powered-by-vitawind-dark.png";
+
+const reducer = (todos, action) => {
+  console.log(todos, action);
+
+  switch (action.type) {
+    case "ADD":
+      return [...todos, { todoContent: handleEnterPoint }];
+
+      break;
+
+    default:
+      break;
+  }
+};
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [todos, dispatch] = useReducer(reducer, []);
+  const [todoContent, setTodoContent] = useState("");
+
+  const handleSubmit = () => {
+    dispatch({ type: "ADD", payload: { todoContent: todoContent } });
+  };
+
+  const handleEnterPoint = (e) => {
+    e.preventDefault();
+    handleSubmit();
+  };
 
   return (
-    <div className="text-center selection:bg-green-900">
-      <header className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] selection:bg-green-900">
+      <header>
         <img
           src={logo}
           className="animate-speed h-60 motion-safe:animate-spin"
@@ -22,43 +45,50 @@ function App() {
           "
           }
         </style>
-        <p className="bg-gradient-to-r from-emerald-300 to-sky-300 bg-clip-text text-5xl font-black text-transparent selection:bg-transparent">
-          Vite + React + Tailwindcss v3
-        </p>
-        <p className="mt-3">
-          <button
-            type="button"
-            className="my-6 rounded bg-gray-300 px-2 py-2 text-[#282C34] transition-all hover:bg-gray-200"
-            onClick={() => setCount((count) => count + 1)}
-          >
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code className="text-[#8d96a7]">App.jsx</code> and save to test
-          HMR updates.
-        </p>
-        <p className="mt-3 flex gap-3 text-center text-[#8d96a7]">
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-400"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="text-[#61dafb] transition-all hover:text-blue-400"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-        <img src={poweredBy} className="mx-auto my-8" alt="powered-by" />
       </header>
+      {/* form */}
+      <main>
+        <div className="mx-auto w-full max-w-xs">
+          <form
+            className="mb-4 w-96 rounded bg-white px-8 pt-6 pb-8 shadow-md"
+            onSubmit={handleEnterPoint}
+          >
+            <div className="mb-4">
+              <label
+                className="mb-2 block text-sm font-bold text-gray-700"
+                htmlFor="content"
+              >
+                Content
+              </label>
+              <input
+                className="focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
+                id="content"
+                type="text"
+                value={todoContent}
+                onChange={(e) => setTodoContent(e.target.value)}
+                placeholder="content"
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                className="focus:shadow-outline rounded bg-blue-500 py-2 px-4 font-bold text-white hover:bg-blue-700 focus:outline-none"
+                type="button"
+                onClick={handleSubmit}
+              >
+                ADD IN
+              </button>
+              <a
+                className="inline-block align-baseline text-sm font-bold text-blue-500 hover:text-blue-800"
+                href="#"
+              >
+                check content?
+              </a>
+            </div>
+          </form>
+          <p className="text-center text-xs text-pink-500">{todoContent}</p>
+        </div>
+      </main>
+      <footer></footer>
     </div>
   );
 }
