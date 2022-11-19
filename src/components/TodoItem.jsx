@@ -5,7 +5,6 @@
  * @returns
  */
 const Todo = ({ todo, dispatch }) => {
-  console.log(todo.complete);
   return (
     <div className="mb-4 flex w-full items-center justify-center gap-4 rounded border font-bold shadow-md shadow-white">
       <span className={`p-6 ${todo.complete && "line-through"}`}>
@@ -19,7 +18,11 @@ const Todo = ({ todo, dispatch }) => {
       >
         {todo.complete ? "Complete" : "Cancel"}
       </button>
-      <button className="rounded  bg-red-400 p-4" type="button">
+      <button
+        className="rounded  bg-red-400 p-4"
+        type="button"
+        onClick={() => dispatch({ type: "DELETE", payload: { id: todo.id } })}
+      >
         Delete
       </button>
     </div>

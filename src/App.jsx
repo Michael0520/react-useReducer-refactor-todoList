@@ -7,9 +7,6 @@ import logo from "./logo.svg";
  * - TOGGLE: 判斷 id 是否 match，有的話，就將 complete = !complete
  */
 const reducer = (todoList, action) => {
-  console.log("todoList:", todoList);
-  console.log("action:", action);
-
   const { todoContent, id } = action.payload;
 
   switch (action.type) {
@@ -22,6 +19,11 @@ const reducer = (todoList, action) => {
           return { ...todo, complete: !todo.complete };
         }
         return todo;
+      });
+
+    case "DELETE":
+      return todoList.filter((todo) => {
+        return todo.id === id;
       });
 
     default:
@@ -49,6 +51,9 @@ function App() {
     e.preventDefault();
     handleSubmit();
   };
+  useEffect(() => {
+    console.table(todoList);
+  }, [todoList]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white selection:bg-green-900">
@@ -107,11 +112,11 @@ function App() {
               </a>
             </div>
           </form>
+
           <p className="text-center text-xs text-pink-500">{todoContent}</p>
 
-          {todoList.map((todo, index) => {
-            console.log("trigger");
-            return <TodoItem key={index} todo={todo} dispatch={dispatch} />;
+          {todoList.map((todo) => {
+            return <TodoItem todo={todo} dispatch={dispatch} />;
           })}
         </div>
       </main>
