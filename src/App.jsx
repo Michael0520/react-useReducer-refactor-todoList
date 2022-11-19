@@ -115,8 +115,6 @@ function App() {
             </div>
           </form>
 
-          <p className="text-center text-xs text-pink-500">{todoContent}</p>
-
           {todoList.map((todo) => {
             return <TodoItem todo={todo} dispatch={dispatch} />;
           })}
