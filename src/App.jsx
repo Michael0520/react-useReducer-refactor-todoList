@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useRef } from "react";
 import { ACTIONS } from "./Actions";
 import TodoItem from "./components/TodoItem";
 import logo from "./logo.svg";
@@ -45,17 +45,30 @@ function App() {
   const [todoList, dispatch] = useReducer(reducer, []);
   const [todoContent, setTodoContent] = useState("");
 
+  const input = useRef(null);
+
   const handleSubmit = () => {
     dispatch({ type: ACTIONS.ADD, payload: { todoContent: todoContent } });
+    setTodoContent("");
   };
 
   const handleEnterPoint = (e) => {
     e.preventDefault();
     handleSubmit();
   };
+
+  const handleInputFocus = (target) => {
+    if (todoContent.length === 0) {
+      target.current.focus();
+    }
+  };
+
+  /**
+   * 判斷
+   */
   useEffect(() => {
-    console.table(todoList);
-  }, [todoList]);
+    handleInputFocus(input);
+  }, [todoContent]);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white selection:bg-green-900">
@@ -96,6 +109,7 @@ function App() {
                 value={todoContent}
                 onChange={(e) => setTodoContent(e.target.value)}
                 placeholder="content"
+                ref={input}
               />
             </div>
             <button
@@ -107,8 +121,8 @@ function App() {
             </button>
           </form>
 
-          {todoList.map((todo) => {
-            return <TodoItem todo={todo} dispatch={dispatch} />;
+          {todoList.map((todo, index) => {
+            return <TodoItem key={index} todo={todo} dispatch={dispatch} />;
           })}
         </div>
       </main>
