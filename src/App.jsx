@@ -1,19 +1,21 @@
 import React, { useEffect, useState, useReducer } from "react";
+import { ACTIONS } from "./Actions";
 import TodoItem from "./components/TodoItem";
 import logo from "./logo.svg";
 
 /**
  * - ADD: 留存原有的 todoList, 單獨去新增 todoContent 以及 complete 的資料
  * - TOGGLE: 判斷 id 是否 match，有的話，就將 complete = !complete
+ * - DELETE: 將 todoList filter match 該點擊的 todoItem ，將沒有 match 到的 item ，return 出來
  */
 const reducer = (todoList, action) => {
   const { todoContent, id } = action.payload;
 
   switch (action.type) {
-    case "ADD":
+    case ACTIONS.ADD:
       return [...todoList, newTodo(todoContent)];
 
-    case "TOGGLE":
+    case ACTIONS.TOGGLE:
       return todoList.map((todo) => {
         if (todo.id === id) {
           return { ...todo, complete: !todo.complete };
@@ -21,9 +23,9 @@ const reducer = (todoList, action) => {
         return todo;
       });
 
-    case "DELETE":
+    case ACTIONS.DELETE:
       return todoList.filter((todo) => {
-        return todo.id === id;
+        return todo.id !== id;
       });
 
     default:
@@ -44,7 +46,7 @@ function App() {
   const [todoContent, setTodoContent] = useState("");
 
   const handleSubmit = () => {
-    dispatch({ type: "ADD", payload: { todoContent: todoContent } });
+    dispatch({ type: ACTIONS.ADD, payload: { todoContent: todoContent } });
   };
 
   const handleEnterPoint = (e) => {
