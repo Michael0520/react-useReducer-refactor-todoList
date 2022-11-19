@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer } from "react";
-import Todo from "./components/Todo";
+import TodoItem from "./components/TodoItem";
 import logo from "./logo.svg";
 
 /**
@@ -102,7 +102,7 @@ function App() {
 
           {todoList.map((todo, index) => {
             console.log("trigger");
-            return <Todo key={index} todo={todo} dispatch={dispatch} />;
+            return <TodoItem key={index} todo={todo} dispatch={dispatch} />;
           })}
         </div>
       </main>
