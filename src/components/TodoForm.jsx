@@ -3,14 +3,13 @@ import { TodoContext } from "../context/TodoContext";
 
 const TodoForm = () => {
   const { addTodo } = useContext(TodoContext);
-  console.log(addTodo);
 
   const [todoContent, setTodoContent] = useState("");
 
   const input = useRef(null);
 
   const handleSubmit = () => {
-    dispatch({ type: ACTIONS.ADD, payload: { todoContent: todoContent } });
+    addTodo(todoContent);
     setTodoContent("");
   };
 
