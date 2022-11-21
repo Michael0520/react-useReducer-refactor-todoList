@@ -1,7 +1,7 @@
 {
   "name": "react-usereducer-refactor-todolist",
   "version": "0.0.0",
-  "homepage": "https://Michael0520.github.io/react-useReducer-refactor-todoList",
+  "homepage": "https://Michael0520.github.io/react-useReducer-refactor-todoList/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
