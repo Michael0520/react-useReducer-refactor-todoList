@@ -34,10 +34,24 @@ export const TodoProvider = ({ children }) => {
     });
   };
 
+  const deleteTodo = (todoId) => {
+    const newTodo = state.todoList.filter((todoItem) => {
+      return todoItem.id !== todoId;
+    });
+
+    dispatch({
+      type: ACTIONS.DELETE_TODO,
+      payload: {
+        todo: newTodo,
+      },
+    });
+  };
+
   const value = {
     todoList: state.todoList,
     addTodo,
     toggleTodo,
+    deleteTodo,
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;

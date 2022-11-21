@@ -8,7 +8,7 @@ import { TodoContext } from "../context/TodoContext";
  * @returns
  */
 const Todo = () => {
-  const { todoList, toggleTodo } = useContext(TodoContext);
+  const { todoList, toggleTodo, deleteTodo } = useContext(TodoContext);
 
   return (
     <>
@@ -29,7 +29,11 @@ const Todo = () => {
             >
               {todoItem.complete ? "Cancel" : "Complete"}
             </button>
-            <button className="rounded  bg-red-400 p-4" type="button">
+            <button
+              className="rounded  bg-red-400 p-4"
+              type="button"
+              onClick={() => deleteTodo(todoItem.id)}
+            >
               Delete
             </button>
           </div>
