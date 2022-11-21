@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import TodoReducer, { initState, ACTIONS } from "../components/TodoReducer";
 
 export const TodoContext = createContext(initState);
@@ -63,4 +63,13 @@ export const todoObj = (todoContent) => {
     todoContent,
     complete: false,
   };
+};
+
+export const useTodo = () => {
+  try {
+    const context = useContext(TodoContext);
+    return context;
+  } catch (error) {
+    console.log("Error");
+  }
 };
