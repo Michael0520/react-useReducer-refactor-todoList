@@ -1,0 +1,27 @@
+export const initState = {
+  todoList: [],
+};
+
+export const ACTIONS = {
+  ADD_TODO: "ADD_TODO",
+  TOGGLE_TODO: "TOGGLE_TODO",
+  DELETE_TODO: "DELETE_TODO",
+};
+
+export const TodoReducer = (state, action) => {
+  const { type, payload } = action;
+
+  console.log("type", type);
+  console.log("payload", payload);
+
+  switch (type) {
+    case ACTIONS.ADD_TODO:
+      return {
+        ...state,
+        todoList: payload.todo,
+      };
+
+    default:
+      return state;
+  }
+};
