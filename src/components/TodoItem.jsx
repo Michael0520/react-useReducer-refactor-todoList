@@ -1,14 +1,7 @@
-import { useContext } from "react";
-import { TodoContext } from "../context/TodoContext";
+import { useTodo } from "../context/TodoContext";
 
-/**
- *
- * @param {Object} todo - 資料內容
- * @param {Object} dispatch - patch event
- * @returns
- */
 const Todo = () => {
-  const { todoList, toggleTodo, deleteTodo } = useContext(TodoContext);
+  const { todoList, toggleTodo, deleteTodo } = useTodo();
 
   return (
     <>
