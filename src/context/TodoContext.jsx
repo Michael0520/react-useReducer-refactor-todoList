@@ -18,9 +18,26 @@ export const TodoProvider = ({ children }) => {
     });
   };
 
+  const toggleTodo = (todoId) => {
+    const newTodo = state.todoList.map((todoItem) => {
+      if (todoItem.id === todoId) {
+        return { ...todoItem, complete: !todoItem.complete };
+      }
+      return todoItem;
+    });
+
+    dispatch({
+      type: ACTIONS.TOGGLE_TODO,
+      payload: {
+        todo: newTodo,
+      },
+    });
+  };
+
   const value = {
     todoList: state.todoList,
     addTodo,
+    toggleTodo,
   };
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>;
