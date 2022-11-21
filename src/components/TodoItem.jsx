@@ -8,13 +8,11 @@ import { TodoContext } from "../context/TodoContext";
  * @returns
  */
 const Todo = () => {
-  const { todoList } = useContext(TodoContext);
-  console.log(todoList);
+  const { todoList, toggleTodo } = useContext(TodoContext);
 
   return (
     <>
       {todoList.map((todoItem) => {
-        console.log(todoItem);
         return (
           <div
             className="mb-4 flex w-full items-center justify-center gap-4 rounded border font-bold shadow-md shadow-white"
@@ -24,8 +22,12 @@ const Todo = () => {
               {todoItem?.todoContent}
             </span>
 
-            <button className="rounded  bg-green-400 p-4" type="button">
-              {todoItem.complete ? "Complete" : "Cancel"}
+            <button
+              className="rounded  bg-green-400 p-4"
+              type="button"
+              onClick={() => toggleTodo(todoItem.id)}
+            >
+              {todoItem.complete ? "Cancel" : "Complete"}
             </button>
             <button className="rounded  bg-red-400 p-4" type="button">
               Delete
