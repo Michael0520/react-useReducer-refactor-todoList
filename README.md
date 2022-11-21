@@ -24,6 +24,7 @@ yarn build
 ```
 
 ---
-<p align="center">
-<img src="./powered-by-vitawind-bright.png">
-</p># react-useReducer-refactor-todoList
+## Demo
+
+![CleanShot 2022-11-22 at 04 18 34](https://user-images.githubusercontent.com/60827537/203150669-266f0d91-8672-4349-8dd3-ae932ba38b14.gif)
+
