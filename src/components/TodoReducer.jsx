@@ -20,6 +20,16 @@ const TodoReducer = (state, action) => {
         ...state,
         todoList: payload.todo,
       };
+    case ACTIONS.TOGGLE_TODO:
+      return {
+        ...state,
+        todoList: payload.todo,
+      };
+    case ACTIONS.DELETE_TODO:
+      return {
+        ...state,
+        todoList: payload.todo,
+      };
 
     default:
       return state;
