@@ -8,7 +8,7 @@ export const ACTIONS = {
   DELETE_TODO: "DELETE_TODO",
 };
 
-export const TodoReducer = (state, action) => {
+const TodoReducer = (state, action) => {
   const { type, payload } = action;
 
   console.log("type", type);
@@ -25,3 +25,5 @@ export const TodoReducer = (state, action) => {
       return state;
   }
 };
+
+export default TodoReducer;
