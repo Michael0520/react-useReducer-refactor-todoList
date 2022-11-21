@@ -10,7 +10,11 @@ function App() {
 
   return (
     <TodoProvider>
-      <div className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white selection:bg-green-900">
+      <div
+        className="flex min-h-screen flex-col items-center justify-center bg-[#282c34] text-white
+      selection:bg-green-900
+      "
+      >
         <header>
           <img
             src={logo}
@@ -28,8 +32,10 @@ function App() {
           </style>
         </header>
         {/* form */}
-        <TodoForm />
-        <TodoItem />
+        <main className=" max-w-3xl md:min-w-[500px]">
+          <TodoForm />
+          <TodoItem />
+        </main>
       </div>
     </TodoProvider>
   );
